@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="fit.nlu.nhown.beans.Trip" %>
-<%@ page import="fit.nlu.nhown.service.TripService" %>
+<%@ page import="nhon.cnpm.it.bean.Trip" %>
+<%@ page import="nhon.cnpm.it.service.TripService" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html lang="en">
 <head>
@@ -118,87 +118,42 @@
                 Duis aute irure dolor in velit esse cillum dolore eu fugiat nulla.
             </p>
         </div><!--/.gallery-header-->
-        <% List<Trip> list = TripService.getInstance().getAllTrip(); %>
+
         <div class="packages-content">
             <div class="row">
-
+                <% List<Trip> list = TripService.getInstance().getAllTrip();
+                for(Trip trip: list) {%>
                 <div class="col-md-12 col-sm-12">
                     <div class="single-package-item">
                         <img src="assets/images/packages/p1.jpg" alt="package-place">
                         <div class="single-package-item-txt">
-                            <h3>italy <span class="pull-right">$499</span></h3>
+                            <h3>Chuyến xe  <span class="pull-right"><%=trip.getPrice()%>  VND</span></h3>
                             <div class="packages-para">
                                 <p>
                                     <span>
-                                        <i class="fa fa-angle-right"></i> Điểm đi
+                                        <i class="fa fa-angle-right"></i> <%=trip.getStartPoint()%>
                                     </span>
-                                    <i class="fa fa-angle-right"></i> Điểm Đến
+                                    <i class="fa fa-angle-right"></i> <%=trip.getEndPoint()%>
                                 </p>
                                 <p>
                                     <span>
-                                        <i class="fa fa-angle-right"></i>  Điểm đón
+                                        <i class="fa fa-angle-right"></i> Điểm đón:  <%=trip.getPlacePoint()%>
                                     </span>
-                                    <i class="fa fa-angle-right"></i> Thời gian khởi hành
-                                </p>
+                                    Ngày khởi hành: <%=trip.getStartDate()%>  Thời gian khởi hành: <%=trip.getStartTime()%>
+                                    </p>
                             </div><!--/.packages-para-->
-                            <div class="packages-review">
-                                <p>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <span>2544 review</span>
-                                </p>
-                            </div><!--/.packages-review-->
                             <div class="about-btn">
+                                <a href="/DatVeXe/ChosenSit?id=<%=trip.getId()%>">
                                 <button class="about-view packages-btn">
-                                    book now
+                                    Đặt vé
                                 </button>
+                                </a>
                             </div><!--/.about-btn-->
                         </div><!--/.single-package-item-txt-->
                     </div><!--/.single-package-item-->
 
                 </div><!--/.col-->
-
-                <div class="col-md-12 col-sm-12">
-                    <div class="single-package-item">
-                        <img src="assets/images/packages/p1.jpg" alt="package-place">
-                        <div class="single-package-item-txt">
-                            <h3>italy <span class="pull-right">$499</span></h3>
-                            <div class="packages-para">
-                                <p>
-                                    <span>
-                                        <i class="fa fa-angle-right"></i> Điểm đi
-                                    </span>
-                                    <i class="fa fa-angle-right"></i> Điểm Đến
-                                </p>
-                                <p>
-                                    <span>
-                                        <i class="fa fa-angle-right"></i>  Điểm đón
-                                    </span>
-                                    <i class="fa fa-angle-right"></i> Thời gian khởi hành
-                                </p>
-                            </div><!--/.packages-para-->
-                            <div class="packages-review">
-                                <p>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <span>2544 review</span>
-                                </p>
-                            </div><!--/.packages-review-->
-                            <div class="about-btn">
-                                <button class="about-view packages-btn">
-                                    book now
-                                </button>
-                            </div><!--/.about-btn-->
-                        </div><!--/.single-package-item-txt-->
-                    </div><!--/.single-package-item-->
-
-                </div><!--/.col-->
+<%}%>
             </div><!--/.row-->
         </div><!--/.packages-content-->
     </div><!--/.container-->

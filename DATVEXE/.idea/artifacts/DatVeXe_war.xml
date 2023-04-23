@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="DatVeXe:war">
+    <output-path>$PROJECT_DIR$/datvexe/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>DatVeXe</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="DatVeXe.war">
+      <element id="artifact" artifact-name="DatVeXe:war exploded" />
+    </root>
+  </artifact>
+</component>
