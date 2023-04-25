@@ -141,7 +141,7 @@
                     <h1>Chú thích</h1>
                     <div class="note-list">
                         <div class="note-item">
-                            <i class="fa-solid fa-user"></i>
+                            <i class="fa-solid fa-user "></i>
                             <p>:Còn trống</p>
                         </div>
                         <div class="note-item">
@@ -165,9 +165,21 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title" id="myModalLabel">Điền Thông Tin</h4>
                             </div>
+
                             <div class="modal-body">
-                                <form action="/InsertVe" method="get" class="input-information">
+                                <form action="/DatVeXe/InsertVe" method="post" class="input-information">
                                     <input id="ve" name="ve" value="" style="display: none">
+                                    <%
+
+                                        String errorMessage = (String) request.getAttribute("errorMessage");
+                                        if (errorMessage != null) {
+                                    %>
+                                    <p><%= errorMessage %></p>
+                                    <%
+                                        }
+                                    %>
+                                    <input id="xe" name="bus" value="<%=bus.getId()%>" style="display: none">
+                                    <input id="trip" name="trip" value="<%=trip.getId()%>" style="display: none">
                                     <label for="phone">Số điện thoại</label>
                                     <input type="number" id="phone" name="phone" placeholder="Số điện thoại..">
 
@@ -177,7 +189,7 @@
                                     <label for="email">Email (Có hoặc Không)</label>
                                     <input type="text" id="email" name="email" placeholder="Email của bạn..">
 
-                                    <input type="submit" value="Xác nhận">
+                                    <input type="submit" value="Xác nhận" )>
                                 </form>
                             </div>
                             <!--                            <div class="modal-footer">-->
@@ -202,7 +214,7 @@
                        <% List<String> list = (List<String>) request.getAttribute("listChairCode");
                        for(String l: list){%>
                         <div class="customer">
-                            <p class="paragraph"><i class="fa-solid fa-user"></i>  <%=l%></p>
+                            <p class="paragraph"><i class="fa-solid fa-user gray "></i>  <%=l%></p>
                         </div>
                       <%}%>
 
@@ -340,14 +352,26 @@
 <script src="assets/js/custom.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    function changeColor(color) {
+        var element = document.querySelector(".fa-solid.fa-user.gray ");
+        element.style.color = color;
+    }
+
+
     var text=""
     $(document).ready(function() {
-        // Lấy thẻ p và thêm sự kiện click
-        $(".paragraph").click(function() {
-           text+= " "+ $(this).text();
-            $(".choose-diagram").text(text);
-            $("#ve").val(text);
-            // console.log(  $(".choose-diagram").text())
+         $(".paragraph").click(function() {
+            if ( text.indexOf($(this).text()) === -1) {
+                text+=  $(this).text()+";";
+                $(".choose-diagram").text(text);
+                changeColor("blue");
+                $("#ve").val(text);
+            } else {
+                changeColor("#666666");
+                text =text.replace(new RegExp($(this).text()+";", "g"), "");
+                $(".choose-diagram").text(text);
+                $("#ve").val(text);
+            }
         });
     });
 

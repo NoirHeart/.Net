@@ -2,6 +2,7 @@ package nhon.cnpm.it.service;
 
 import nhon.cnpm.it.bean.Bus;
 import nhon.cnpm.it.bean.Trip;
+import nhon.cnpm.it.bean.Ve;
 import nhon.cnpm.it.db.JDBIConnector;
 
 import java.util.List;
@@ -69,8 +70,42 @@ public class TripService {
         return t;
     }
 
-    public static void main(String[] args) {
-        System.out.println(getInstance().getBus("xe001"));
+    public List<Ve> getlistChairCodeInCart() {
+        List<Ve> list = JDBIConnector.get().withHandle(handle ->
+                handle.createQuery("SELECT maghe , id_tuyen, id_xe FROM ve")
+                        .mapToBean(Ve.class).list());
+        return list;
     }
+
+    public boolean checkCart(String maghe, String id_tuyen, String id_xe) {
+        List<Ve> list = TripService.getInstance().getlistChairCodeInCart();
+        for (Ve ve : list) {
+            if (maghe.equals(ve.getMaghe()) && id_tuyen.equals(ve.getId_tuyen()) && id_xe.equals(ve.getId_xe())) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    public static void addVeToCart(String email, String phone, String chaircode, String name, String idTuyen, String idxe) {
+        JDBIConnector.get().withHandle(handle -> {
+            String sql = "INSERT INTO ve VALUES ( ?, ?, ?, ?, ?, ?)";
+            return handle.createUpdate(sql)
+                    .bind(0, email)
+                    .bind(1, phone)
+                    .bind(2, chaircode)
+                    .bind(3, name)
+                    .bind(4, idTuyen)
+                    .bind(5, idxe)
+                    .execute();
+        });
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(TripService.getInstance().checkCart("p001","tx001","xe001"));
+    }
+
 
 }

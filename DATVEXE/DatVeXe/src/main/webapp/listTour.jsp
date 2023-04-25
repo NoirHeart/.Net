@@ -125,7 +125,7 @@
                 for(Trip trip: list) {%>
                 <div class="col-md-12 col-sm-12">
                     <div class="single-package-item">
-                        <img src="assets/images/packages/p1.jpg" alt="package-place">
+                        <img src="assets/images/xe.jpg" alt="package-place">
                         <div class="single-package-item-txt">
                             <h3>Chuyến xe  <span class="pull-right"><%=trip.getPrice()%>  VND</span></h3>
                             <div class="packages-para">
