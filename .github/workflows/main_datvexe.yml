@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'datvexe'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_39E300E261014D8A85FF0231997D5D86 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2FEBA5FCB3E04D7CA54668515F971D72 }}
           package: '*.war'
